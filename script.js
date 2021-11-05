@@ -120,6 +120,7 @@ document.querySelector(".submit_changes").addEventListener("click", () => {
 	openNote_content.style.display = "block";
 	openNote_content.textContent = editMode.querySelector("textarea").value;
 	editMode.classList.add("hidden");
+	console.log(current);
 	current.querySelector(".note_p").textContent =
 		editMode.querySelector("textarea").value;
 });
