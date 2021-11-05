@@ -1,0 +1,342 @@
+$color_grey: #dddddd;
+$color_darkergrey: #a1a1a1;
+$color_dark: #585858;
+@mixin flexbox($align: center, $justify: center) {
+	display: flex;
+	align-items: $align;
+	justify-content: $justify;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body,
+html {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Raleway", sans-serif;
+	position: relative;
+	min-height: 100vh;
+	max-width: 100vw;
+	color: $color_dark;
+}
+
+section {
+	width: 100%;
+	position: relative;
+}
+
+button {
+	padding: 15px 30px;
+	font-size: 16px;
+	color: $color_dark;
+	margin: 15px 0px;
+	background-color: transparent;
+	border: 3px solid $color_grey;
+	border-radius: 15px;
+	transition: all 350ms;
+	outline: none;
+	cursor: pointer;
+
+	&:hover {
+		background-color: $color_dark;
+		color: white;
+		border: 3px solid $color_dark;
+	}
+}
+
+.header {
+	font-family: "Oswald", sans-serif;
+	background-color: $color_grey;
+	height: 100px;
+	padding: 30px 80px;
+	@include flexbox($justify: space-between);
+
+	h1 {
+		font-size: 70px;
+		font-weight: 400;
+		text-transform: uppercase;
+	}
+
+	img {
+		height: 50px;
+		cursor: pointer;
+	}
+
+	p {
+		font-size: 20px;
+	}
+}
+
+.createNote {
+	@include flexbox;
+	padding: 50px 0px;
+	min-height: 300px;
+
+	&__container {
+		border: 3px solid $color_grey;
+		border-radius: 30px;
+
+		h2 {
+			font-size: 20px;
+			padding: 5px 20px;
+			color: $color_darkergrey;
+			font-weight: 500;
+			border-bottom: 3px solid $color_grey;
+		}
+	}
+
+	form {
+		width: 700px;
+		padding: 20px;
+
+		input {
+			border-bottom: 3px solid $color_grey;
+			width: 100%;
+			padding: 5px 10px;
+			font-size: 19px;
+		}
+
+		input::placeholder {
+			color: $color_darkergrey;
+			font-weight: 300;
+		}
+
+		input,
+		textarea {
+			background-color: none;
+			border-top: none;
+			border-right: none;
+			border-left: none;
+			width: 100%;
+			outline: none;
+			font-size: 18px;
+		}
+
+		textarea {
+			font-family: "Raleway", sans-serif;
+			border-bottom: none;
+			padding: 10px;
+			height: auto;
+			overflow: auto;
+		}
+	}
+}
+
+.notes {
+	@include flexbox(flex-start);
+	flex-wrap: wrap;
+	padding: 50px 100px;
+
+	&__item {
+		max-width: 350px;
+		min-width: 300px;
+		border: 3px solid $color_grey;
+		margin: 20px;
+		border-radius: 30px;
+		cursor: pointer;
+
+		h2 {
+			font-size: 20px;
+			padding: 20px;
+			border-bottom: 3px solid $color_grey;
+		}
+
+		h3 {
+			display: inline-block;
+			// padding: 5px;
+			margin-left: 15px;
+			font-weight: 500;
+		}
+
+		p {
+			padding: 15px 10px;
+			border-bottom: 3px solid $color_grey;
+			max-height: 350px;
+			min-height: 150px;
+			overflow: hidden;
+		}
+
+		.social-media {
+			padding: 5px 20px 0px 0px;
+			height: 30px;
+			box-shadow: 0px -10px 15px -3px
+				rgba($color: $color_darkergrey, $alpha: 0.6);
+		}
+
+		img {
+			height: 20px;
+			float: right;
+			cursor: pointer;
+		}
+	}
+}
+
+.openNote {
+	@include flexbox;
+	position: fixed;
+	background-color: rgba($color: #fff, $alpha: 0.8);
+	transition: all 400ms;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	opacity: 1;
+	z-index: 27;
+
+	&__holder {
+		width: 70%;
+		max-height: 80vh;
+		border: 3px solid $color_grey;
+		border-radius: 50px;
+		background-color: white;
+		transition: all 400ms;
+		padding: 0px 0px 10px 0px;
+		opacity: 1;
+		z-index: 27;
+		box-shadow: 0px 0px 20px 0px $color_grey;
+	}
+
+	h2 {
+		display: inline-block;
+		padding: 10px 70px 10px 30px;
+		font-size: 50px;
+		font-weight: 600;
+		border-bottom: 3px solid $color_grey;
+	}
+
+	&__container {
+		position: relative;
+		@include flexbox(flex-start, space-between);
+		margin-bottom: 20px;
+
+		div {
+			padding: 30px;
+		}
+
+		img {
+			position: absolute;
+			top: -50px;
+			right: 30px;
+			cursor: pointer;
+			display: block;
+		}
+
+		textarea {
+			background-color: none;
+			border-top: none;
+			border-right: none;
+			border-left: none;
+			width: 100%;
+			max-height: 50vh;
+			outline: none;
+			font-size: 18px;
+			font-family: "Raleway", sans-serif;
+			border-bottom: none;
+			padding: 10px;
+			height: auto;
+			overflow: auto;
+		}
+	}
+
+	&__buttons {
+		width: 25%;
+
+		button {
+			width: 90%;
+		}
+	}
+
+	&__content {
+		width: 75%;
+
+		p {
+			overflow-x: scroll;
+			max-height: 57vh;
+		}
+	}
+
+	&__date {
+		display: inline-block;
+		margin-left: 20px;
+	}
+
+	.edit_mode {
+		padding: 0;
+		display: block;
+
+		&.hidden {
+			display: none;
+		}
+	}
+
+	&.hidden {
+		opacity: 0;
+		z-index: -1;
+	}
+}
+
+@media only screen and (max-width: 912px) {
+	.header {
+		padding: 30px;
+		height: 80px;
+
+		h1 {
+			font-size: 50px;
+		}
+
+		p {
+			display: none;
+		}
+	}
+
+	.createNote {
+		width: 100%;
+		margin: 0px;
+		padding: 30px;
+
+		form {
+			width: 100%;
+		}
+	}
+
+	.notes {
+		padding: 0px;
+
+		&__item {
+			width: calc(100vw - 60px);
+			max-width: 100vw;
+		}
+	}
+
+	.openNote {
+		&__holder {
+			width: 90vw;
+			max-height: 90vh;
+		}
+
+		&__container {
+			flex-direction: column-reverse;
+		}
+
+		&__buttons {
+			width: 100%;
+
+			button {
+				width: 100%;
+				margin: 5px 0px;
+				padding: 12px 0px;
+			}
+		}
+
+		&__content {
+			width: 100%;
+		}
+	}
+}
