@@ -14,6 +14,7 @@ const createNew__title = createNew.querySelector("input");
 const createNew__content = createNew.querySelector("textarea");
 
 const notes = document.querySelector(".notes");
+let current = undefined;
 
 createNew__content.addEventListener("keyup", (e) => {
 	textAreaAdjust(e.target);
@@ -95,6 +96,8 @@ notes.addEventListener("click", (e) => {
 		openNote_date.textContent = parent.querySelector(".note_date").textContent;
 		openNote.classList.remove("hidden");
 		document.body.style.overflow = "hidden";
+
+		current = parent;
 	}
 });
 
@@ -117,4 +120,6 @@ document.querySelector(".submit_changes").addEventListener("click", () => {
 	openNote_content.style.display = "block";
 	openNote_content.textContent = editMode.querySelector("textarea").value;
 	editMode.classList.add("hidden");
+	current.querySelector(".note_p").textContent =
+		editMode.querySelector("textarea").value;
 });
